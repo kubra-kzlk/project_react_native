@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react';
-import { Stack } from 'expo-router';
+/**
+ * Hoofdcomponent voor de app layout die de navigatiestructuur en context opzet.
+ * Gebruikt CoffeeProvider voor state beheer en Expo Router voor navigatie.
+ */
+import { CoffeeProvider } from "@/src/context/CoffeeProvider";
+import { Stack } from "expo-router";
 
-export default function Layout() {
-
-  return (
-    <Stack
-      initialRouteName="index"
-      screenOptions={{
-        headerShown: false, // Disable headers globally
-      }}
-    >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="CoffeeList" />
-      <Stack.Screen name="CoffeeDetail" />
-      <Stack.Screen name="AddCoffee" />
-    </Stack>
-  );
+function AppLayout() {
+    return (
+        <CoffeeProvider>
+            {/* Stack navigator zonder headers, voor tab navigatie */}
+            <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(tabs)" />
+            </Stack>
+        </CoffeeProvider>
+    );
 }
 
+export default AppLayout;
