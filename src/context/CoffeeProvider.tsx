@@ -16,14 +16,16 @@ export const CoffeeProvider = ({ children }: CoffeeProviderProps) => {
 
     // Laad coffees bij het opstarten van de app
     useEffect(() => {
-        loadCoffees();
-    }, []);
+        if (type) {
+            loadCoffees(type); // Pass the type to the function
+        }
+    }, [type]);
 
     // Hoofdfuncties voor coffee beheer
-    const loadCoffees = async () => {
+    const loadCoffees = async (type: 'hot' | 'iced') => {
         try {
             setIsLoading(true);
-            const data = await coffeeService.getCoffeeList();
+            const data = await coffeeService.getCoffeeList(type);
             setCoffees(data);
         } catch (error) {
             throw new Error("Failed to load coffee list");
@@ -46,7 +48,7 @@ export const CoffeeProvider = ({ children }: CoffeeProviderProps) => {
     };
 
 
-    const reloadMangas = () => loadCoffees();
+    const reloadCoffees = () => loadCoffees();
 
     return (
         <CoffeeContext.Provider
@@ -54,7 +56,7 @@ export const CoffeeProvider = ({ children }: CoffeeProviderProps) => {
                 coffees,
                 isLoading,
                 addCoffee,
-                reloadMangas,
+                reloadCoffees,
             }}
         >
             {children}

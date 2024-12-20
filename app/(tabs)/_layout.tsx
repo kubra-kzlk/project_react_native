@@ -1,20 +1,67 @@
-import React, { useEffect } from 'react';
-import { Stack } from 'expo-router';
+/**
+ * Hoofdnavigatie layout voor de app met tab-based navigatie.
+ * Configureert de tab bar met iconen en kleuren.
+ */
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function Layout() {
 
+const TabsLayout = () => {
   return (
-    <Stack
-      initialRouteName="index"
+    <Tabs
       screenOptions={{
-        headerShown: false, // Disable headers globally
+        tabBarActiveTintColor: "#007AFF",
+        headerStyle: {
+          backgroundColor: "white",
+        },
+        headerShadowVisible: false,
+        tabBarStyle: {
+          backgroundColor: "white",
+        },
       }}
     >
-      <Stack.Screen name="index" />
-      <Stack.Screen name="CoffeeList" />
-      <Stack.Screen name="CoffeeDetail" />
-      <Stack.Screen name="AddCoffee" />
-    </Stack>
+      {/* Collectie tab - Hoofdoverzicht van coffees */}
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Collection",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="library" size={size} color={color} />
+          ),
+        }}
+      />
+      {/* Zoek tab - Voor het toevoegen van nieuwe coffees */}
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search" size={size} color={color} />
+          ),
+        }}
+      />
+      {/* Tracker tab - Voor coffee herinneringen*/}
+      <Tabs.Screen
+        name="tracker"
+        options={{
+          title: "Tracker",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="calendar" size={size} color={color} />
+          ),
+        }}
+      />
+      {/* Locaties tab - Voor het bijhouden van coffeelocaties */}
+      <Tabs.Screen
+        name="locations"
+        options={{
+          title: "Coffee Spots",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="location" size={size} color={color} />
+          ),
+        }}
+      />
+    </Tabs>
   );
-}
+};
 
+export default TabsLayout;

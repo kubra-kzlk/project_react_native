@@ -20,3 +20,6 @@ export interface CoffeeContextType {
 export interface CoffeeProviderProps {
     children: React.ReactNode;
 }
+export interface AddButtonProps {
+    onPress: () => void;
+}
